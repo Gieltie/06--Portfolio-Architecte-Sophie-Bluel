@@ -80,3 +80,41 @@ const filterBtnsStyle = () => {
   });
 };
 filterBtnsStyle();
+
+////////////////// TOUT POUR LE LOGIN ET AFFICHAGE DES ELEMENTS MODIFIER //////////////////
+// Je check si le token est dans le localstorage si oui je montre le banner et les boutons modifier
+// sinon je montre les boutons pour filtrer les travaux
+const banner = document.querySelector(".banner");
+const logoutElement = document.getElementById("logout");
+const linkModalIntro = document.querySelector(".link-modal-intro");
+const linkModal = document.querySelector(".link-modal");
+
+const userLoginCheck = () => {
+  document.addEventListener("DOMContentLoaded", () => {
+    const token = localStorage.getItem("token");
+    if (token != null) {
+      filter.style.display = "none";
+      banner.style.display = "flex";
+      logoutElement.textContent = "logout";
+      linkModalIntro.style.display = "inline";
+      linkModal.style.display = "inline";
+    } else {
+      //filterBtns();
+    }
+  });
+};
+userLoginCheck();
+
+logoutElement.addEventListener("click", () => {
+  localStorage.clear("token");
+  window.location.href = "./index.html";
+});
+////////////////// TOUT POUR QUAND EN EST LOGGED-IN //////////////////
+
+// Je change le nom login vers logout en mode edition
+
+/* document.querySelector("#linkModal").addEventListener("click", openModal);
+document
+  .querySelector("#modal-close-btn")
+  .addEventListener("click", closeModal);
+ */

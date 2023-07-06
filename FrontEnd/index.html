@@ -16,6 +16,11 @@
 </head>
 
 <body>
+	<div class="loggedIn banner">
+		<i class="fa-regular fa-pen-to-square"></i>
+    	<p>Mode édition</p>
+    	<button>publier les changements</button>
+	</div>
 	<header>
 		<h1>Sophie Bluel <span>Architecte d'inteérieur</span></h1>
 		<nav>
@@ -31,6 +36,7 @@
 	<section id="introduction">
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
+			<a class="link-modal-intro"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
 			<h2>Designer d'espace</h2>
@@ -41,7 +47,7 @@
 	</section>
 
 	<section id="portfolio">
-		<h2>Mes Projets<span class="loggedIn"></span></h2>
+		<h2>Mes Projets<span class="loggedIn"><a class="link-modal"><i class="fa-regular fa-pen-to-square"></i> modifier</a></span></h2>
 		<!-- ajout des boutons pour filtrer -->
 		<div class="filter"></div>
 		<div class="gallery"></div>
