@@ -69,12 +69,60 @@
 
 	<aside class="modal" id="modal">
 		<div class="modal-container">
-			<button class="modal-return-btn hidden" id="modal-return-btn" ><i class="fa-solid fa-arrow-left-long"></i></button>
 			<button class="modal-close-btn" id="modal-close-btn" ><i class="fa-solid fa-xmark"></i></button>
 			<h3>Galerie photo</h3>
 			<div class="galleryModal" id="modal-inner"></div>
 			<button class="btn-ajouter">Ajouter une photo</button><br>
 			<button class="btn-supprimer" id="btn-postNewWork">Supprimer la galerie</button>
+		</div>
+	</aside>
+
+	<aside class="modal" id="modal-two">
+		<div class="modal-container">
+			<button class="modal-return-btn" id="modal-return-btn" ><i class="fa-solid fa-arrow-left-long"></i></button>
+			<button class="modal-close-btn" id="modal-close-btn" ><i class="fa-solid fa-xmark"></i></button>
+			<h3>Ajout photo</h3>
+			<form id="formAddImage">
+				<div class="image-container">
+					<img id="example-img" src="./assets/icons/picture-svg.svg" alt="empty picture">
+					<img id="file-img" src="#" alt="your image"/>
+		
+					<div id="input-image-container">
+						<label class="file-label" for="imgInp">+ Ajouter photo
+						<input type="file"
+							   id="imgInp"
+							   name="file"
+							   accept="image/png, image/jpeg"
+							   value="+ Ajouter une photo">
+						</label>
+					</div>
+					<span id="image-restriction">jpg, png : 4mo max</span>
+				</div>
+				<span id="error-image"></span>
+		
+				<div class="title">
+					<label for="input-title">Titre</label>
+					<input type="text" 
+						   name="title" 
+						   id="input-title" 
+						   required>
+				</div>
+				<span id="error-title"></span>
+		
+				<div class="category">
+					<label for="category">Catégorie</label>
+					<select name="category" id="category" required>
+						<option value="0" disabled selected hidden> </option>
+						<option value="1">Objets</option>
+						<option value="2">Appartements</option>
+						<option value="3">Hotels & restaurants</option>
+					</select>
+				</div>
+				<span id="error-categorie"></span>
+				
+				<input class="btn-valider" type="submit" value="Valider">
+				</form>
+			
 		</div>
 	</aside>
 

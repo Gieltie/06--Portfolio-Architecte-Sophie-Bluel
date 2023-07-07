@@ -113,6 +113,7 @@ logoutElement.addEventListener("click", () => {
 const galleryModal = document.querySelector(".galleryModal");
 const btnAddWork = document.querySelector(".btn-ajouter");
 const modal = document.querySelector("#modal");
+const modalTwo = document.querySelector("#modal-two");
 const btnDeleteWork = document.querySelector(".btn-supprimer");
 const modalTitle = document.querySelector(".modal-container h3");
 //const category = document.querySelector(".category");
@@ -134,16 +135,16 @@ const createModalGallery = (objet) => {
   //deleteWork();
 };
 
-const closeModal = () => {
-  modal.style.display = "none";
-};
-
 // J'ajoute display flex pour faire apparaitre le modal avec les travaux miniature
 linkModal.addEventListener("click", () => {
   modal.style.display = "flex";
   const modalWorks = works;
   createModalGallery(modalWorks);
 });
+
+const closeModal = () => {
+  modal.style.display = "none";
+};
 
 // J'ecoute le autour la modale pour fermer la modale
 addEventListener("click", (e) => {
@@ -163,3 +164,8 @@ addEventListener("keydown", (e) => {
 modalCloseBtn.addEventListener("click", () => {
   closeModal();
 });
+
+////////////////// TOUT POUR LE MODAL 2 //////////////////
+const exampleImg = document.getElementById("example-img");
+const fileImg = document.getElementById("file-img");
+fileImg.style.display = "none";
