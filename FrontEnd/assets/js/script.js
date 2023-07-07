@@ -134,6 +134,10 @@ const createModalGallery = (objet) => {
   //deleteWork();
 };
 
+const closeModal = () => {
+  modal.style.display = "none";
+};
+
 // J'ajoute display flex pour faire apparaitre le modal avec les travaux miniature
 linkModal.addEventListener("click", () => {
   modal.style.display = "flex";
@@ -148,7 +152,14 @@ addEventListener("click", (e) => {
   }
 });
 
+// J'ecoute l'appuie sur la touche esc pour fermer la modale
+addEventListener("keydown", (e) => {
+  if (e.key === "Escape" || e.key === "Esc") {
+    closeModal();
+  }
+});
+
 // J'ecoute le bouton pour fermer la modale
 modalCloseBtn.addEventListener("click", () => {
-  modal.style.display = "none";
+  closeModal();
 });
