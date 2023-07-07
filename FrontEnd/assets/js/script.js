@@ -131,7 +131,7 @@ const createModalGallery = (objet) => {
     </figure>`;
   }
   galleryModal.innerHTML = galleries;
-  //deleteWork();
+  deleteWork();
 };
 
 // J'ajoute display flex pour faire apparaitre le modal avec les travaux miniature
@@ -164,6 +164,30 @@ addEventListener("keydown", (e) => {
 modalCloseBtn.addEventListener("click", () => {
   closeModal();
 });
+
+// Je peut supprimer un traveau selectione
+const deleteWork = () => {
+  const arrays = document.querySelectorAll(".delete");
+  for (work of arrays) {
+    work.addEventListener("click", (e) => {
+      fetch("http://localhost:5678/api/works/" + e.target.id, {
+        method: "DELETE",
+        headers: {
+          Authorization: "Bearer " + token,
+        },
+      })
+        .then((res) => {
+          if (res.ok) {
+            console.log("Le projet est supprime");
+          }
+        })
+        .catch((error) => {
+          console.log("Une erreur c'est produite" + error);
+        });
+      console.log(e.target.id);
+    });
+  }
+};
 
 btnAddNewWork.addEventListener("click", () => {
   closeModal();
@@ -234,6 +258,28 @@ newWorksForm.addEventListener("submit", (e) => {
   e.preventDefault();
   fetchNewWorks();
   fetchWorks();
+
+  /* if (fileValue.files[0] === undefined) {
+    document.getElementById("error-image").innerText =
+      "Veuillez ajouter une photo";
+  }
+  if (titleValue.value === "") {
+    document.getElementById("error-title").innerText =
+      "Veuillez remplir un titre";
+  }
+  if (Number(categoryValue.value) === 0) {
+    document.getElementById("error-category").innerText =
+      "Veuillez selectioner une catégorie.";
+  } */
+
+  if (
+    titleValue.value === "" ||
+    Number(categoryValue.value) === 0 ||
+    fileValue.files[0] === undefined
+  ) {
+    document.getElementById("error-category").innerText =
+      "Veuillez remplir tous les champs pour continuer.";
+  }
 });
 
 // Je check si tout est remplis dans la form et je change la couleur du bouton valider

@@ -98,27 +98,26 @@
 					</div>
 					<span id="image-restriction">jpg, png : 4mo max</span>
 				</div>
-				<span id="error-image"></span>
+				<span id="error-image" class="error"></span>
 		
 				<div class="title">
 					<label for="title-input">Titre</label>
 					<input type="text" 
 						   name="title" 
-						   id="title-input"
-						   required>
+						   id="title-input">
+					<span id="error-title" class="error"></span>
 				</div>
-				<span id="error-title"></span>
 		
 				<div class="category">
 					<label for="category">Catégorie</label>
-					<select name="category" id="category" required>
+					<select name="category" id="category">
 						<option value="0" disabled selected hidden> </option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hotels & restaurants</option>
 					</select>
+					<span id="error-category" class="error"></span>
 				</div>
-				<span id="error-categorie"></span>
 				
 				<input class="btn-valider" type="submit" value="Valider">
 				</form>
