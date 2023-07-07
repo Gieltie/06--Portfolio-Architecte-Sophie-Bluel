@@ -58,9 +58,9 @@
 		<p>Vous avez un projet ? Discutons-en !</p>
 		<form action="#" method="post">
 			<label for="name">Nom</label>
-			<input type="text" name="name" id="name">
+			<input type="text" name="name" id="name" autocomplete="on">
 			<label for="email">Email</label>
-			<input type="email" name="email" id="email">
+			<input type="email" name="email" id="email" autocomplete="on">
 			<label for="message">Message</label>
 			<textarea name="message" id="message" cols="30" rows="10"></textarea>
 			<input type="submit" value="Envoyer">
@@ -82,15 +82,15 @@
 			<button class="modal-return-btn" ><i class="fa-solid fa-arrow-left-long"></i></button>
 			<button class="modal-two-close-btn"><i class="fa-solid fa-xmark"></i></button>
 			<h3>Ajout photo</h3>
-			<form id="formAddImage">
+			<form id="form-new-works">
 				<div class="image-container">
 					<img id="example-img" src="./assets/icons/picture-svg.svg" alt="empty picture">
-					<img id="file-img" src="#" alt="your image"/>
+					<img id="file-img" class="hidden" src="#" alt="your image"/>
 		
 					<div id="input-image-container">
-						<label class="file-label" for="imgInp">+ Ajouter photo
+						<label class="file-label" for="img-input">+ Ajouter photo
 						<input type="file"
-							   id="imgInp"
+							   id="img-input"
 							   name="file"
 							   accept="image/png, image/jpeg"
 							   value="+ Ajouter une photo">
@@ -101,10 +101,10 @@
 				<span id="error-image"></span>
 		
 				<div class="title">
-					<label for="input-title">Titre</label>
+					<label for="title-input">Titre</label>
 					<input type="text" 
 						   name="title" 
-						   id="input-title" 
+						   id="title-input"
 						   required>
 				</div>
 				<span id="error-title"></span>

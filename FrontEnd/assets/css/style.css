@@ -387,7 +387,7 @@ hr {
 
 /* ------------------------------------------------------------- */
 
-#formAddImage {
+#form-new-works {
 	width: 75%;
 }
 
@@ -409,6 +409,13 @@ hr {
 
 input[type="file"]{
 	display: none;
+}
+
+#file-img {
+	display: none;
+	margin: 0;
+	height: 169px;
+	width: 129px;
 }
 
 #image-restriction {
@@ -449,7 +456,7 @@ input[type="file"]{
 }
 
 #category,
-#input-title {
+#title-input {
 	background: #FFFFFF;
 	border: none;
 	padding: 20px 10px;
@@ -471,9 +478,6 @@ input[type="submit"] {
 	padding: 10px 30px;
 }
 
-#fileImg {
-	margin: 0;
-	height: 169px;
-	width: 129px;
+.hidden {
+	display: none;
 }
-

@@ -10,6 +10,9 @@ const fetchWorks = () => {
     .then((data) => {
       works = data;
       createGallery(works);
+    })
+    .catch((error) => {
+      console.log(error);
     });
 };
 fetchWorks();
@@ -168,19 +171,84 @@ btnAddNewWork.addEventListener("click", () => {
 });
 
 ////////////////// TOUT POUR LE MODAL 2 //////////////////
+const newWorksForm = document.getElementById("form-new-works");
 const returnBtn = document.querySelector(".modal-return-btn");
 const modalTwoCloseBtn = document.querySelector(".modal-two-close-btn");
-//const category = document.querySelector(".category");
-
+const inputImageContainer = document.getElementById("input-image-container");
 const exampleImg = document.getElementById("example-img");
 const fileImg = document.getElementById("file-img");
-fileImg.style.display = "none";
+const imgInput = document.getElementById("img-input");
+const imageRestriction = document.getElementById("image-restriction");
 
 returnBtn.addEventListener("click", () => {
-  modalTwo.style.display = "none";
   modal.style.display = "flex";
+  modalTwo.style.display = "none";
+  newWorksForm.reset();
+  inputImageContainer.style.display = "flex";
+  exampleImg.style.display = "flex";
+  fileImg.style.display = "none";
+  imageRestriction.style.display = "flex";
 });
 
 modalTwoCloseBtn.addEventListener("click", () => {
   modalTwo.style.display = "none";
 });
+
+imgInput.onchange = () => {
+  const [file] = imgInput.files;
+  if (file) {
+    fileImg.src = URL.createObjectURL(file);
+    inputImageContainer.style.display = "none";
+    imageRestriction.style.display = "none";
+    exampleImg.style.display = "none";
+    fileImg.style.display = "flex";
+  }
+};
+
+////////////////// TOUT LE FORMDATA //////////////////
+const fileValue = document.querySelector('input[type="file"]');
+const titleValue = document.getElementById("title-input");
+const categoryValue = document.getElementById("category");
+const btnValider = document.querySelector(".btn-valider");
+
+const fetchNewWorks = () => {
+  const formData = new FormData();
+  formData.append("image", fileValue.files[0]);
+  formData.append("title", titleValue.value);
+  formData.append("category", Number(categoryValue.value));
+
+  fetch("http://localhost:5678/api/works", {
+    method: "POST",
+    headers: {
+      Authorization: "Bearer " + token,
+    },
+    body: formData,
+  })
+    .then((response) => response.json())
+    .catch((error) => {
+      console.error(error);
+    });
+};
+
+newWorksForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  fetchNewWorks();
+  fetchWorks();
+});
+
+// Je check si tout est remplis dans la form et je change la couleur du bouton valider
+titleValue.addEventListener("change", checkForm);
+categoryValue.addEventListener("change", checkForm);
+fileValue.addEventListener("change", checkForm);
+
+function checkForm() {
+  if (
+    titleValue.value !== "" &&
+    categoryValue.value !== "" &&
+    fileValue.files[0] !== undefined
+  ) {
+    btnValider.style.backgroundColor = "#1D6154";
+  } else {
+    btnValider.style.backgroundColor = "#A7A7A7";
+  }
+}
