@@ -299,7 +299,7 @@ footer {
 	align-items: center;
 }
 
-.modal-close-btn, .modal-return-btn {
+.modal-close-btn, .modal-two-close-btn, .modal-return-btn {
 	position: relative;
 	left: 260px;
 	top: 20px;

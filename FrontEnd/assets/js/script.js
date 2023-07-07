@@ -109,16 +109,12 @@ logoutElement.addEventListener("click", () => {
 });
 
 ////////////////// TOUT POUR LE MODAL //////////////////
-// Je recupere tout les balises necessaire pour creer le modal
 const galleryModal = document.querySelector(".galleryModal");
-const btnAddWork = document.querySelector(".btn-ajouter");
-const modal = document.querySelector("#modal");
-const modalTwo = document.querySelector("#modal-two");
-const btnDeleteWork = document.querySelector(".btn-supprimer");
-const modalTitle = document.querySelector(".modal-container h3");
-//const category = document.querySelector(".category");
-const returnBtn = document.getElementById("modal-return-btn");
-const modalCloseBtn = document.querySelector("#modal-close-btn");
+const modal = document.querySelector(".modal");
+const modalCloseBtn = document.querySelector(".modal-close-btn");
+const btnAddNewWork = document.querySelector(".btn-ajouter");
+const modalTwo = document.querySelector(".modal-two");
+//const btnDeleteWork = document.querySelector(".btn-supprimer");
 
 // Je cree la gallery dans le modal
 const createModalGallery = (objet) => {
@@ -144,11 +140,12 @@ linkModal.addEventListener("click", () => {
 
 const closeModal = () => {
   modal.style.display = "none";
+  modalTwo.style.display = "none";
 };
 
 // J'ecoute le autour la modale pour fermer la modale
 addEventListener("click", (e) => {
-  if (e.target === modal) {
+  if (e.target === modal || e.target === modalTwo) {
     closeModal();
   }
 });
@@ -165,7 +162,25 @@ modalCloseBtn.addEventListener("click", () => {
   closeModal();
 });
 
+btnAddNewWork.addEventListener("click", () => {
+  closeModal();
+  modalTwo.style.display = "flex";
+});
+
 ////////////////// TOUT POUR LE MODAL 2 //////////////////
+const returnBtn = document.querySelector(".modal-return-btn");
+const modalTwoCloseBtn = document.querySelector(".modal-two-close-btn");
+//const category = document.querySelector(".category");
+
 const exampleImg = document.getElementById("example-img");
 const fileImg = document.getElementById("file-img");
 fileImg.style.display = "none";
+
+returnBtn.addEventListener("click", () => {
+  modalTwo.style.display = "none";
+  modal.style.display = "flex";
+});
+
+modalTwoCloseBtn.addEventListener("click", () => {
+  modalTwo.style.display = "none";
+});
