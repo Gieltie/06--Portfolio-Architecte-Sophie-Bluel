@@ -276,6 +276,7 @@ footer {
 
 /* Je stylise mon modale */
 .modal {
+	display: none;
 	position: fixed;
 	align-items: center;
 	justify-content: center;

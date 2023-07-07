@@ -89,17 +89,16 @@ const logoutElement = document.getElementById("logout");
 const linkModalIntro = document.querySelector(".link-modal-intro");
 const linkModal = document.querySelector(".link-modal");
 
+////////////////// TOUT POUR QUAND EN EST LOGGED-IN //////////////////
 const userLoginCheck = () => {
   document.addEventListener("DOMContentLoaded", () => {
     const token = localStorage.getItem("token");
     if (token != null) {
       filter.style.display = "none";
       banner.style.display = "flex";
-      logoutElement.textContent = "logout";
+      logoutElement.textContent = "logout"; // Je change le nom login vers logout en mode edition
       linkModalIntro.style.display = "inline";
       linkModal.style.display = "inline";
-    } else {
-      //filterBtns();
     }
   });
 };
@@ -107,14 +106,49 @@ userLoginCheck();
 
 logoutElement.addEventListener("click", () => {
   localStorage.clear("token");
-  window.location.href = "./index.html";
 });
-////////////////// TOUT POUR QUAND EN EST LOGGED-IN //////////////////
 
-// Je change le nom login vers logout en mode edition
+////////////////// TOUT POUR LE MODAL //////////////////
+// Je recupere tout les balises necessaire pour creer le modal
+const galleryModal = document.querySelector(".galleryModal");
+const btnAddWork = document.querySelector(".btn-ajouter");
+const modal = document.querySelector("#modal");
+const btnDeleteWork = document.querySelector(".btn-supprimer");
+const modalTitle = document.querySelector(".modal-container h3");
+//const category = document.querySelector(".category");
+const returnBtn = document.getElementById("modal-return-btn");
+const modalCloseBtn = document.querySelector("#modal-close-btn");
 
-/* document.querySelector("#linkModal").addEventListener("click", openModal);
-document
-  .querySelector("#modal-close-btn")
-  .addEventListener("click", closeModal);
- */
+// Je cree la gallery dans le modal
+const createModalGallery = (objet) => {
+  let galleries = "";
+  for (let work of objet) {
+    galleries += `
+    <figure class="gallery-modal-work">
+        <img src="${work.imageUrl}">
+        <i class="fa-solid fa-trash-can delete" id="${work.id}"></i>
+        <figcaption>éditer</figcaption>
+    </figure>`;
+  }
+  galleryModal.innerHTML = galleries;
+  //deleteWork();
+};
+
+// J'ajoute display flex pour faire apparaitre le modal avec les travaux miniature
+linkModal.addEventListener("click", () => {
+  modal.style.display = "flex";
+  const modalWorks = works;
+  createModalGallery(modalWorks);
+});
+
+// J'ecoute le autour la modale pour fermer la modale
+addEventListener("click", (e) => {
+  if (e.target === modal) {
+    closeModal();
+  }
+});
+
+// J'ecoute le bouton pour fermer la modale
+modalCloseBtn.addEventListener("click", () => {
+  modal.style.display = "none";
+});
