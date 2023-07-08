@@ -165,7 +165,7 @@ modalCloseBtn.addEventListener("click", () => {
   closeModal();
 });
 
-// Je peut supprimer un traveau selectione
+////////////////// TOUT POUR SUPPRIMER LES TRAVAUX //////////////////
 const deleteWork = () => {
   const arrays = document.querySelectorAll(".delete");
   for (work of arrays) {
@@ -178,6 +178,7 @@ const deleteWork = () => {
       })
         .then((res) => {
           if (res.ok) {
+            newGallery();
             console.log("Le projet est supprime");
           }
         })
@@ -187,6 +188,16 @@ const deleteWork = () => {
       console.log(e.target.id);
     });
   }
+};
+
+// Je remets a jour les galerie
+const newGallery = () => {
+  fetch("http://localhost:5678/api/works/")
+    .then((resp) => resp.json())
+    .then((data) => {
+      createGallery(data);
+      createModalGallery(data);
+    });
 };
 
 btnAddNewWork.addEventListener("click", () => {
@@ -257,7 +268,6 @@ const fetchNewWorks = () => {
 newWorksForm.addEventListener("submit", (e) => {
   e.preventDefault();
   fetchNewWorks();
-  fetchWorks();
 
   /* if (fileValue.files[0] === undefined) {
     document.getElementById("error-image").innerText =
