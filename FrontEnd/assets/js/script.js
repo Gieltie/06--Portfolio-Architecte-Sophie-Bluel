@@ -260,6 +260,9 @@ const fetchNewWorks = () => {
     body: formData,
   })
     .then((response) => response.json())
+    .then((data) => {
+      addNewWorkGallery(data);
+    })
     .catch((error) => {
       console.error(error);
     });
@@ -268,7 +271,6 @@ const fetchNewWorks = () => {
 newWorksForm.addEventListener("submit", (e) => {
   e.preventDefault();
   fetchNewWorks();
-
   /* if (fileValue.files[0] === undefined) {
     document.getElementById("error-image").innerText =
       "Veuillez ajouter une photo";
@@ -291,6 +293,15 @@ newWorksForm.addEventListener("submit", (e) => {
       "Veuillez remplir tous les champs pour continuer.";
   }
 });
+
+const addNewWorkGallery = () => {
+  fetch("http://localhost:5678/api/works/")
+    .then((resp) => resp.json())
+    .then((data) => {
+      createGallery(data);
+      createModalGallery(data);
+    });
+};
 
 // Je check si tout est remplis dans la form et je change la couleur du bouton valider
 titleValue.addEventListener("change", checkForm);
