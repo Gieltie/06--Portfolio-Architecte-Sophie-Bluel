@@ -10,7 +10,7 @@
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=Work+Sans&display=swap" rel="stylesheet">
 	<!-- Font awesome -->
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
 	<!-- CSS -->
 	<link rel="stylesheet" href="./assets/css/style.css">
 </head>
@@ -34,12 +34,13 @@
 	</header>
 <main>
 	<section id="introduction">
+		<h2 hidden>hidden</h2> <!-- pour effacer l'erreur au w3c validateur -->
 		<figure>
 			<img src="./assets/images/sophie-bluel.png" alt="">
 			<a class="link-modal-intro"><i class="fa-regular fa-pen-to-square"></i> modifier</a>
 		</figure>
 		<article>
-			<h2>Designer d'espace</h2>
+		<h2>Designer d'espace</h2>
 			<p>Je raconte votre histoire, je valorise vos idées. Je vous accompagne de la conception à la livraison finale du chantier.</p>
 			<p>Chaque projet sera étudié en commun, de façon à mettre en valeur les volumes, les matières et les couleurs dans le respect de l’esprit des lieux et le choix adapté des matériaux. Le suivi du chantier sera assuré dans le souci du détail, le respect du planning et du budget.</p>
 			<p>En cas de besoin, une équipe pluridisciplinaire peut-être constituée : architecte DPLG, décorateur(trice)</p>
@@ -85,15 +86,14 @@
 			<form id="form-new-works">
 				<div class="image-container">
 					<img id="example-img" src="./assets/icons/picture-svg.svg" alt="empty picture">
-					<img id="file-img" class="hidden" src="#" alt="your image"/>
+					<img id="file-img" class="hidden" src="#" alt="your image">
 		
 					<div id="input-image-container">
 						<label class="file-label" for="img-input">+ Ajouter photo
 						<input type="file"
 							   id="img-input"
 							   name="file"
-							   accept="image/png, image/jpeg"
-							   value="+ Ajouter une photo">
+							   accept="image/png, image/jpeg">
 						</label>
 					</div>
 					<span id="image-restriction">jpg, png : 4mo max</span>
@@ -109,7 +109,7 @@
 				<div class="category">
 					<label for="category">Catégorie</label>
 					<select name="category" id="category">
-						<option value="0" disabled selected hidden> </option>
+						<option value="0" disabled selected hidden>Choisir Catégorie</option>
 						<option value="1">Objets</option>
 						<option value="2">Appartements</option>
 						<option value="3">Hotels & restaurants</option>
