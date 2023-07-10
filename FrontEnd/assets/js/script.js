@@ -1,7 +1,6 @@
 const gallery = document.querySelector(".gallery"); // Je selectionne la balise gallery
 const filter = document.querySelector(".filter");
 const token = localStorage.getItem("token"); // Je recupere le token dans le local storage
-//let works = [];
 
 // Je recupere les donnees de l'API et je les place dans un array
 const fetchWorks = () => {
@@ -190,7 +189,7 @@ const deleteWork = () => {
   }
 };
 
-// Je remets a jour les galerie
+// Je fait la mise a jour des galeries
 const newGallery = () => {
   fetch("http://localhost:5678/api/works/")
     .then((resp) => resp.json())
@@ -200,12 +199,14 @@ const newGallery = () => {
     });
 };
 
+// J'ecoute sur le click bouton "ajouter une photo"
+// pour fermer la premiere modale et ouvrir la deuxieme
 btnAddNewWork.addEventListener("click", () => {
   closeModal();
   modalTwo.style.display = "flex";
 });
 
-////////////////// TOUT POUR LE MODAL 2 //////////////////
+////////////////// TOUT POUR LE MODALE 2 //////////////////
 const newWorksForm = document.getElementById("form-new-works");
 const returnBtn = document.querySelector(".modal-return-btn");
 const modalTwoCloseBtn = document.querySelector(".modal-two-close-btn");
@@ -215,20 +216,30 @@ const fileImg = document.getElementById("file-img");
 const imgInput = document.getElementById("img-input");
 const imageRestriction = document.getElementById("image-restriction");
 
-returnBtn.addEventListener("click", () => {
-  modal.style.display = "flex";
-  modalTwo.style.display = "none";
+// Fonction pour effacer la formulaire modale 2
+const clearModalTwo = () => {
   newWorksForm.reset();
   inputImageContainer.style.display = "flex";
   exampleImg.style.display = "flex";
   fileImg.style.display = "none";
   imageRestriction.style.display = "flex";
+};
+
+// J'ecoute le bouton fleche gauche pour retourner sur le premier modale
+returnBtn.addEventListener("click", () => {
+  clearModalTwo();
+  modal.style.display = "flex";
+  modalTwo.style.display = "none";
+  errorMsg.innerText = "";
 });
 
+// Je ferme la deuxieme modale
 modalTwoCloseBtn.addEventListener("click", () => {
   modalTwo.style.display = "none";
 });
 
+// J'ecoute si la photo est selectione, j'efface le contenue du containeur
+// et je remplace avec une photo miniature
 imgInput.onchange = () => {
   const [file] = imgInput.files;
   if (file) {
@@ -246,6 +257,10 @@ const titleValue = document.getElementById("title-input");
 const categoryValue = document.getElementById("category");
 const btnValider = document.querySelector(".btn-valider");
 
+const errorMsg = document.getElementById("error-msg");
+
+// Je recupere les info du formulaire et cree une objet
+// J'envoie au backend
 const fetchNewWorks = () => {
   const formData = new FormData();
   formData.append("image", fileValue.files[0]);
@@ -268,32 +283,21 @@ const fetchNewWorks = () => {
     });
 };
 
+// J'ecoute le bouton valider si toutes les champs sont remplis sinon message d'erreur
 newWorksForm.addEventListener("submit", (e) => {
   e.preventDefault();
   fetchNewWorks();
-  /* if (fileValue.files[0] === undefined) {
-    document.getElementById("error-image").innerText =
-      "Veuillez ajouter une photo";
-  }
-  if (titleValue.value === "") {
-    document.getElementById("error-title").innerText =
-      "Veuillez remplir un titre";
-  }
-  if (Number(categoryValue.value) === 0) {
-    document.getElementById("error-category").innerText =
-      "Veuillez selectioner une catégorie.";
-  } */
-
   if (
     titleValue.value === "" ||
     Number(categoryValue.value) === 0 ||
     fileValue.files[0] === undefined
   ) {
-    document.getElementById("error-category").innerText =
-      "Veuillez remplir tous les champs pour continuer.";
+    errorMsg.innerText = "Veuillez remplir tous les champs pour continuer.";
   }
+  clearModalTwo();
 });
 
+// Je recupere les travaux et je mets les galeries a jour
 const addNewWorkGallery = () => {
   fetch("http://localhost:5678/api/works/")
     .then((resp) => resp.json())
@@ -315,6 +319,7 @@ function checkForm() {
     fileValue.files[0] !== undefined
   ) {
     btnValider.style.backgroundColor = "#1D6154";
+    errorMsg.innerText = "";
   } else {
     btnValider.style.backgroundColor = "#A7A7A7";
   }
