@@ -28,7 +28,7 @@ form.addEventListener("submit", (e) => {
     .then((data) => {
       if (data.token) {
         // Je sauvegarde le token dans le local storage
-        localStorage.setItem("token", data.token);
+        sessionStorage.setItem("token", data.token);
         //localStorage.setItem("userId", data.userId);
         // Je renvoie sur la page d'accueille
         window.location.href = "./index.html";

@@ -1,6 +1,6 @@
 const gallery = document.querySelector(".gallery"); // Je selectionne la balise gallery
 const filter = document.querySelector(".filter");
-const token = localStorage.getItem("token"); // Je recupere le token dans le local storage
+const token = sessionStorage.getItem("token"); // Je recupere le token dans le local storage
 
 // Je recupere les donnees de l'API et je les place dans un array
 const fetchWorks = () => {
@@ -43,7 +43,7 @@ const filterBtns = () => {
 filterBtns();
 
 // J'ecoutes au click de la souris pour filtrer par categorie
-document.querySelector(".btn-tous").addEventListener("click", (e) => {
+document.querySelector(".btn-tous").addEventListener("click", () => {
   createGallery(works);
 });
 
@@ -94,10 +94,11 @@ const linkModal = document.querySelector(".link-modal");
 ////////////////// TOUT POUR QUAND EN EST LOGGED-IN //////////////////
 const userLoginCheck = () => {
   document.addEventListener("DOMContentLoaded", () => {
-    const token = localStorage.getItem("token");
+    const token = sessionStorage.getItem("token");
     if (token != null) {
       filter.style.display = "none";
       banner.style.display = "flex";
+      logoutElement.setAttribute("href", "./index.html");
       logoutElement.textContent = "logout"; // Je change le nom login vers logout en mode edition
       linkModalIntro.style.display = "inline";
       linkModal.style.display = "inline";
@@ -107,7 +108,7 @@ const userLoginCheck = () => {
 userLoginCheck();
 
 logoutElement.addEventListener("click", () => {
-  localStorage.clear("token");
+  sessionStorage.clear("token");
 });
 
 ////////////////// TOUT POUR LE MODAL //////////////////
