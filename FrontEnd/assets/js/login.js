@@ -24,19 +24,28 @@ form.addEventListener("submit", (e) => {
   };
   // Je fait la requéte a l'API
   fetch("http://localhost:5678/api/users/login", options)
-    .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 200) {
+        return response.json();
+      } else if (response.status === 404) {
+        errorDisplay.innerHTML = "Nous n'avons pas trouvé votre adresse mail";
+      } else {
+        errorDisplay.innerHTML = "Erreur dans l'identifiant ou le mot de passe";
+        email.value = "";
+        password.value = "";
+      }
+    })
     .then((data) => {
       if (data.token) {
         // Je sauvegarde le token dans le local storage
         sessionStorage.setItem("token", data.token);
-        //localStorage.setItem("userId", data.userId);
         // Je renvoie sur la page d'accueille
         window.location.href = "./index.html";
-      } else {
+      } /* else {
         // en cas d'erreur message
         errorDisplay.textContent =
           "Erreur dans l’identifiant ou le mot de passe";
-      }
+      } */
       // Je vide le formulaire
       form.reset();
     });
