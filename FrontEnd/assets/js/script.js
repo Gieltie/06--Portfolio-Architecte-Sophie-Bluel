@@ -47,21 +47,21 @@ document.querySelector(".btn-tous").addEventListener("click", () => {
   createGallery(works);
 });
 
-document.querySelector(".btn-objets").addEventListener("click", (e) => {
-  const objets = works.filter((e) => {
-    return e.category.id === 1;
+document.querySelector(".btn-objets").addEventListener("click", () => {
+  const objets = works.filter((event) => {
+    return event.category.id === 1;
   });
   createGallery(objets);
 });
 
-document.querySelector(".btn-appartements").addEventListener("click", (e) => {
+document.querySelector(".btn-appartements").addEventListener("click", () => {
   const objetId = works.filter((event) => {
     return event.category.id === 2;
   });
   createGallery(objetId);
 });
 
-document.querySelector(".btn-hotel").addEventListener("click", (e) => {
+document.querySelector(".btn-hotel").addEventListener("click", () => {
   const objetId = works.filter((event) => {
     return event.category.id === 3;
   });
@@ -71,13 +71,13 @@ document.querySelector(".btn-hotel").addEventListener("click", (e) => {
 // Je change le style du bouton quand il est active
 const filterBtnsStyle = () => {
   let filterBtn = null;
-  filter.addEventListener("click", (e) => {
-    if (e.target.nodeName === "BUTTON") {
-      e.target.classList.add("btnFilled");
+  filter.addEventListener("click", (event) => {
+    if (event.target.nodeName === "BUTTON") {
+      event.target.classList.add("btnFilled");
       if (filterBtn !== null) {
         filterBtn.classList.remove("btnFilled");
       }
-      filterBtn = e.target;
+      filterBtn = event.target;
     }
   });
 };
@@ -147,15 +147,15 @@ const closeModal = () => {
 };
 
 // J'ecoute le autour la modale pour fermer la modale
-addEventListener("click", (e) => {
-  if (e.target === modal || e.target === modalTwo) {
+addEventListener("click", (event) => {
+  if (event.target === modal || event.target === modalTwo) {
     closeModal();
   }
 });
 
 // J'ecoute l'appuie sur la touche esc pour fermer la modale
-addEventListener("keydown", (e) => {
-  if (e.key === "Escape" || e.key === "Esc") {
+addEventListener("keydown", (event) => {
+  if (event.key === "Escape" || event.key === "Esc") {
     closeModal();
   }
 });
@@ -167,17 +167,17 @@ modalCloseBtn.addEventListener("click", () => {
 
 ////////////////// TOUT POUR SUPPRIMER LES TRAVAUX //////////////////
 const deleteWork = () => {
-  const arrays = document.querySelectorAll(".delete");
-  for (work of arrays) {
-    work.addEventListener("click", (e) => {
-      fetch("http://localhost:5678/api/works/" + e.target.id, {
+  const workArray = document.querySelectorAll(".delete");
+  for (work of workArray) {
+    work.addEventListener("click", (event) => {
+      fetch("http://localhost:5678/api/works/" + event.target.id, {
         method: "DELETE",
         headers: {
           Authorization: "Bearer " + token,
         },
       })
-        .then((res) => {
-          if (res.ok) {
+        .then((response) => {
+          if (response.ok) {
             newGallery();
             console.log("Le projet est supprime");
           }
@@ -185,7 +185,6 @@ const deleteWork = () => {
         .catch((error) => {
           console.log("Une erreur c'est produite" + error);
         });
-      console.log(e.target.id);
     });
   }
 };
@@ -193,7 +192,7 @@ const deleteWork = () => {
 // Je fait la mise a jour des galeries
 const newGallery = () => {
   fetch("http://localhost:5678/api/works/")
-    .then((resp) => resp.json())
+    .then((response) => response.json())
     .then((data) => {
       createGallery(data);
       createModalGallery(data);
@@ -285,8 +284,8 @@ const fetchNewWorks = () => {
 };
 
 // J'ecoute le bouton valider si toutes les champs sont remplis sinon message d'erreur
-newWorksForm.addEventListener("submit", (e) => {
-  e.preventDefault();
+newWorksForm.addEventListener("submit", (event) => {
+  event.preventDefault();
   fetchNewWorks();
   if (
     titleValue.value === "" ||
@@ -294,6 +293,9 @@ newWorksForm.addEventListener("submit", (e) => {
     fileValue.files[0] === undefined
   ) {
     errorMsg.innerText = "Veuillez remplir tous les champs pour continuer.";
+  } else {
+    errorMsg.style.color = "green";
+    errorMsg.innerText = "Nouveau travail bien pris en compte.";
   }
   clearModalTwo();
 });
@@ -301,7 +303,7 @@ newWorksForm.addEventListener("submit", (e) => {
 // Je recupere les travaux et je mets les galeries a jour
 const addNewWorkGallery = () => {
   fetch("http://localhost:5678/api/works/")
-    .then((resp) => resp.json())
+    .then((response) => response.json())
     .then((data) => {
       createGallery(data);
       createModalGallery(data);

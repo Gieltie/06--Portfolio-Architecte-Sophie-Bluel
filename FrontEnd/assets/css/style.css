@@ -262,7 +262,7 @@ li:hover, li a:hover {
 	border-radius: 60px ;
 }
 .error {
-	margin-top: 20px;
+	margin-top: 35px;
 	color: #D65353;
 	text-align: center;
 }
@@ -303,7 +303,7 @@ footer {
 .modal-close-btn, .modal-two-close-btn, .modal-return-btn {
 	position: relative;
 	left: 260px;
-	top: 20px;
+	top: 25px;
 	background-color: #FFF;
 	border: none;
 }
